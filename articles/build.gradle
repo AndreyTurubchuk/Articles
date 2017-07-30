@@ -1,0 +1,83 @@
+group 'io.antur.articles'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+war {
+    baseName = 'articles'
+    version = '1'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+            output.classesDir   = 'build/classes/main'
+        }
+        resources {
+            srcDir 'src/main/resources'
+            include '*.properties'
+            include '*.xml'
+            output.resourcesDir = 'build/classes/main'
+        }
+    }
+}
+
+dependencies {
+
+    // spring framework
+    compile 'org.springframework:spring-context:4.2.5.RELEASE'
+    compile 'org.springframework:spring-core:4.2.5.RELEASE'
+    compile 'org.springframework:spring-webmvc:4.2.5.RELEASE'
+    compile 'org.springframework:spring-web:4.2.5.RELEASE'
+
+// jstl tag lib
+    compile 'jstl:jstl:1.2'
+
+// javax
+    compile 'javax.servlet:javax.servlet-api:3.1.0'
+
+// postgre
+    compile 'org.postgresql:postgresql:9.4.1212'
+    testCompile 'org.postgresql:postgresql:9.4.1212'
+
+// support orm classes
+    compile 'org.springframework:spring-orm:4.2.5.RELEASE'
+    testCompile 'org.springframework:spring-orm:4.2.5.RELEASE'
+
+// Hibernate -->
+    compile 'org.hibernate:hibernate-core:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-core:5.2.10.Final'
+
+// cache API
+    compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
+    compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.2.10.Final'
+    compile group: 'org.hibernate', name: 'hibernate-jcache', version: '5.2.10.Final'
+    compile 'org.springframework:spring-context-support:4.3.8.RELEASE'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    // optional
+    compile 'org.hibernate:hibernate-osgi:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-osgi:5.2.10.Final'
+    compile 'org.hibernate:hibernate-envers:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-envers:5.2.10.Final'
+    compile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
+    compile 'org.hibernate:hibernate-proxool:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-proxool:5.2.10.Final'
+    compile 'org.hibernate:hibernate-infinispan:5.2.10.Final'
+    testCompile 'org.hibernate:hibernate-infinispan:5.2.10.Final'
+    compile 'org.hibernate:hibernate-validator:5.4.1.Final'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
